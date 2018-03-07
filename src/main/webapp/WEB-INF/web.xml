@@ -13,14 +13,8 @@
     <welcome-file>/WEB-INF/jsp/index.jsp</welcome-file>
   </welcome-file-list>
 
-  <filter>
-    <filter-name>thma</filter-name>
-    <filter-class>com.mlt.cms.util.XthmlFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>thma</filter-name>
-    <url-pattern>*.xhtmlll</url-pattern>
-  </filter-mapping>
+
+
 
   <filter>
     <filter-name>encodingFilter</filter-name>
