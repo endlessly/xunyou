@@ -2,14 +2,14 @@
         "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
-    <classPathEntry location="G:\mysql-connector-java-5.1.20-bin.jar"/>
+    <classPathEntry location="/Users/huruisc/Desktop/jar/mysql-connector-java-5.1.29-bin.jar"/>
     <context id="my" targetRuntime="MyBatis3">
         <commentGenerator>
             <property name="suppressDate" value="false"/>
             <property name="suppressAllComments" value="true"/>
         </commentGenerator>
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/xunyou"
-                        userId="root" password=""/>
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/xunyou_v1"
+                        userId="root" password="123456"/>
         <javaModelGenerator targetPackage="com.xunyou.model" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>

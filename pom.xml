@@ -27,7 +27,6 @@
     </properties>
 
 
-
     <dependencies>
         <!-- Junit测试 -->
         <dependency>
@@ -148,22 +147,7 @@
             <artifactId>jackson-core-asl</artifactId>
             <version>${jackson.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.codehaus.jackson</groupId>
-            <artifactId>jackson-mapper-asl</artifactId>
-            <version>${jackson.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-            <!--<version></version>-->
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <!--<version>${jackson.version}</version>-->
-        </dependency>
-        <!-- 上传组件包 -->
+       <!-- 上传组件包 -->
         <dependency>
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
