@@ -4,10 +4,12 @@ import com.alibaba.fastjson.JSON;
 import com.xunyou.model.UserEntity;
 import com.xunyou.model.UserInfoEntity;
 import com.xunyou.service.UserService;
-import com.xunyou.utils.RequestUtil;
+import com.xunyou.utils.JsonUtil;
 import com.xunyou.utils.ResultMsgDto;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,11 +20,12 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.*;
 
 @Controller
 @ResponseBody
-public class UserAction  {
+public class UserAction {
     @Autowired
     UserService userService;
 
@@ -33,8 +36,8 @@ public class UserAction  {
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public String login(HttpServletRequest request, HttpServletResponse response) {
-        String username =request.getParameter("username");
-        String password =request.getParameter("password");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
 
         if (username == null || password == null) {
             return "fail";
@@ -45,23 +48,22 @@ public class UserAction  {
             return "fail";
 //        Map session=(Map) request.getSession();
 //        session.put("user",user);
-       HttpSession session= request.getSession();
-       session.setAttribute("user",user);
-        return  "success";
+        HttpSession session = request.getSession();
+        session.setAttribute("user", user);
+        return "success";
     }
 
-    @RequestMapping (value = "cklogin")
+    @RequestMapping(value = "cklogin")
     public String ckLogin(HttpServletRequest request, HttpServletResponse response) {
-        UserEntity user=(UserEntity) request.getSession().getAttribute("user");
-        if(user==null)
-            return  "unlogin";
+        UserEntity user = (UserEntity) request.getSession().getAttribute("user");
+        if (user == null)
+            return "unlogin";
         return "login";
     }
 
-    @RequestMapping (value = "register")
-    public String register(@RequestBody HttpServletRequest request) {
-    System.out.println(request.getParameterNames());
-        return "";
+    @RequestMapping(value = "register")
+    public String register(@RequestBody ModelMap modelMap) {
+        return "fsf";
     }
 
-    }
+}
