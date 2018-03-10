@@ -29,9 +29,13 @@ public class FileUpload {
                 //一次遍历所有文件
                 MultipartFile file = multiRequest.getFile(iter.next().toString());
                 if (file != null) {
-                    path = "E:/springUpload" + file.getOriginalFilename();
+                    String fileName=file.getOriginalFilename();
+                    path = "/Users/huruisc/Documents/upload/";
+                    String extentionName=fileName.substring(fileName.lastIndexOf("."));
+                    String newPath=path+MD5Util.getMD5Code(fileName)+extentionName;
+                    System.out.println(newPath);
                     //上传
-                    file.transferTo(new File(path));
+                    file.transferTo(new File(newPath));
                 }
 
             }
