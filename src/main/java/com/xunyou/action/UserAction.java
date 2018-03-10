@@ -1,10 +1,12 @@
 package com.xunyou.action;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.xunyou.model.UserEntity;
 import com.xunyou.model.UserInfoEntity;
 import com.xunyou.service.UserService;
 import com.xunyou.utils.JsonUtil;
+import com.xunyou.utils.MapEntryConvet;
 import com.xunyou.utils.ResultMsgDto;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,10 +65,13 @@ public class UserAction {
     }
 
     @RequestMapping(value = "register")
-    public String register(@RequestBody ModelMap modelMap) {
+    public String register(@RequestBody ModelMap modelMap) throws InstantiationException, IllegalAccessException, IOException {
         UserEntity userEntity = new UserEntity();
-        userEntity = JsonUtil.toMapObject(modelMap.toString(), "");
-        return "fsf";
+        String user = JsonUtil.toJson(modelMap.get("user"));
+        Map maps = JsonUtil.JsonTomap(user);
+        userEntity = MapEntryConvet.toBean(userEntity.getClass(), maps);
+        System.out.println(JsonUtil.toJson(userEntity));
+        return "";
     }
 
 }

@@ -1,5 +1,6 @@
 package com.xunyou.utils;
 
+import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
@@ -7,6 +8,9 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -56,5 +60,50 @@ public class JsonUtil {
         ObjectMapper mapper = new ObjectMapper();
         JavaType t = getCollectionType(HashMap.class, String.class, c);
         return (Map<String, T>) mapper.readValue(content, t);
+    }
+
+    private <T> Map<String, Object> EntToMap(Object model, Class<T> t, Map<String, Object> map) {
+        try {
+            Field[] fields = t.getDeclaredFields();
+            if (fields.length > 0 && map == null)
+                map = new HashMap<String, Object>();
+            for (Field f : fields) {
+                String name = f.getName();
+                name = name.substring(0, 1).toUpperCase() + name.substring(1); //将属性的首字符大写，方便构造get，set方法
+                Method m = model.getClass().getMethod("get" + name);
+                String value = String.valueOf(m.invoke(model));
+                if (map != null && value != null)
+                    map.put(f.getName(), value);
+                else
+                    map.put(f.getName(), "");
+            }
+            if (t.getSuperclass() != null) {
+                EntToMap(model, t.getSuperclass(), map);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return map;
+    }
+
+    /**
+     * 实体类转成Map对象
+     *
+     * @param model
+     * @return
+     */
+    public <T> Map<String, Object> Entity2Map(Object model) {
+        Map<String, Object> map = null;
+        try {
+            map = EntToMap(model, model.getClass(), map);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return map;
+    }
+
+    public static Map JsonTomap(String json) {
+        Map maps = (Map) JSON.parse(json);
+        return maps;
     }
 }
