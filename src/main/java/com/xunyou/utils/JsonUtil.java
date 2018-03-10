@@ -9,7 +9,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -62,6 +61,11 @@ public class JsonUtil {
         return (Map<String, T>) mapper.readValue(content, t);
     }
 
+    public static Map JsonTomap(String json) {
+        Map maps = (Map) JSON.parse(json);
+        return maps;
+    }
+
     private <T> Map<String, Object> EntToMap(Object model, Class<T> t, Map<String, Object> map) {
         try {
             Field[] fields = t.getDeclaredFields();
@@ -100,10 +104,5 @@ public class JsonUtil {
             e.printStackTrace();
         }
         return map;
-    }
-
-    public static Map JsonTomap(String json) {
-        Map maps = (Map) JSON.parse(json);
-        return maps;
     }
 }

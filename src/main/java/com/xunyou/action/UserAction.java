@@ -113,6 +113,5 @@ public class UserAction {
         resultMsgDto.setResultCode(1);
         resultMsgDto.setResultMsg("修改成功");
         return resultMsgDto;
-
     }
 }
