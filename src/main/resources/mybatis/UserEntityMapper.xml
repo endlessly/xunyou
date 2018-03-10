@@ -185,9 +185,9 @@
       update_date = #{updateDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectByUserNameAndPwd" parameterType="com.xunyou.model.UserEntity">
-  SELECT
+  <select id="selectByUserNameAndPwd"  resultType="com.xunyou.model.UserEntity">
+    select
     <include refid="Base_Column_List" />
-    FROM xy_user WHERE name='user' AND password ='user'
+    FROM xy_user WHERE name= #{arg0} AND password = #{arg1}
   </select>
 </mapper>

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -24,13 +25,13 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public UserEntity selectIdByNameAndPwd(Map map) {
-
-        UserEntity userEntity=userEntityMapper.selectByUserNameAndPwd();
-       if (null==userEntity){
+    public UserEntity selectIdByNameAndPwd(String username ,String password) {
+        List list;
+        UserEntity user =userEntityMapper.selectByUserNameAndPwd(username,password);
+       if (null==user){
            return  null;
        }else {
-           return  userEntity;
+           return  user;
        }
     }
 

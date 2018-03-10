@@ -2,6 +2,7 @@ package com.xunyou.service;
 
 import com.xunyou.model.UserEntity;
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -11,7 +12,7 @@ public interface  UserService {
 
     public int insert(UserEntity entity);
 
-    public UserEntity selectIdByNameAndPwd(Map map);
+    public UserEntity selectIdByNameAndPwd(String username,String password);
 
     public int update(UserEntity entity);
 
