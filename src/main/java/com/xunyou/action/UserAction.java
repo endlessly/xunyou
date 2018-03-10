@@ -20,6 +20,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.text.html.parser.Entity;
 import java.io.IOException;
 import java.util.*;
 
@@ -63,6 +64,8 @@ public class UserAction {
 
     @RequestMapping(value = "register")
     public String register(@RequestBody ModelMap modelMap) {
+        UserEntity userEntity = new UserEntity();
+        userEntity = JsonUtil.toMapObject(modelMap.toString(), "");
         return "fsf";
     }
 
