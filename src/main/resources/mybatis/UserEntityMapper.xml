@@ -127,7 +127,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.xunyou.model.UserEntity">
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunyou.model.UserEntity" >
     update xy_user
     <set>
       <if test="nickName != null">

@@ -23,9 +23,12 @@ public class UserServiceImpl extends BaseService implements UserService{
 
     @Override
     public int update(UserEntity entity) {
-
-        return 0;
-
+        try{userEntityMapper.updateByPrimaryKeySelective(entity);
+            return 1;
+        }catch (Exception e){
+          e.printStackTrace();
+          return 0;
+        }
     }
 
     @Override
