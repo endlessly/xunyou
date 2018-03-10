@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xunyou.mapper.TouristEntityMapper">
+  <resultMap id="BaseResultMap" type="com.xunyou.model.TouristEntity">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="tourist_no" jdbcType="VARCHAR" property="touristNo" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="lon" jdbcType="VARCHAR" property="lon" />
+    <result column="lat" jdbcType="VARCHAR" property="lat" />
+    <result column="specialities" jdbcType="VARCHAR" property="specialities" />
+    <result column="open_start_time" jdbcType="TIMESTAMP" property="openStartTime" />
+    <result column="open_end_time" jdbcType="TIMESTAMP" property="openEndTime" />
+    <result column="is_free" jdbcType="BIT" property="isFree" />
+    <result column="ticket_price" jdbcType="DECIMAL" property="ticketPrice" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="status" jdbcType="BIT" property="status" />
+    <result column="is_del" jdbcType="BIT" property="isDel" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.xunyou.model.TouristEntity">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, title, tourist_no, address, lon, lat, specialities, open_start_time, open_end_time, 
+    is_free, ticket_price, create_date, update_date, status, is_del
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from xy_tourist
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from xy_tourist
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xunyou.model.TouristEntity">
+    insert into xy_tourist (id, title, tourist_no, 
+      address, lon, lat, 
+      specialities, open_start_time, open_end_time, 
+      is_free, ticket_price, create_date, 
+      update_date, status, is_del, 
+      content)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{touristNo,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{lon,jdbcType=VARCHAR}, #{lat,jdbcType=VARCHAR}, 
+      #{specialities,jdbcType=VARCHAR}, #{openStartTime,jdbcType=TIMESTAMP}, #{openEndTime,jdbcType=TIMESTAMP}, 
+      #{isFree,jdbcType=BIT}, #{ticketPrice,jdbcType=DECIMAL}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{status,jdbcType=BIT}, #{isDel,jdbcType=BIT}, 
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xunyou.model.TouristEntity">
+    insert into xy_tourist
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="touristNo != null">
+        tourist_no,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="lon != null">
+        lon,
+      </if>
+      <if test="lat != null">
+        lat,
+      </if>
+      <if test="specialities != null">
+        specialities,
+      </if>
+      <if test="openStartTime != null">
+        open_start_time,
+      </if>
+      <if test="openEndTime != null">
+        open_end_time,
+      </if>
+      <if test="isFree != null">
+        is_free,
+      </if>
+      <if test="ticketPrice != null">
+        ticket_price,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="touristNo != null">
+        #{touristNo,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="lon != null">
+        #{lon,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null">
+        #{lat,jdbcType=VARCHAR},
+      </if>
+      <if test="specialities != null">
+        #{specialities,jdbcType=VARCHAR},
+      </if>
+      <if test="openStartTime != null">
+        #{openStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="openEndTime != null">
+        #{openEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isFree != null">
+        #{isFree,jdbcType=BIT},
+      </if>
+      <if test="ticketPrice != null">
+        #{ticketPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=BIT},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunyou.model.TouristEntity">
+    update xy_tourist
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="touristNo != null">
+        tourist_no = #{touristNo,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="lon != null">
+        lon = #{lon,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null">
+        lat = #{lat,jdbcType=VARCHAR},
+      </if>
+      <if test="specialities != null">
+        specialities = #{specialities,jdbcType=VARCHAR},
+      </if>
+      <if test="openStartTime != null">
+        open_start_time = #{openStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="openEndTime != null">
+        open_end_time = #{openEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isFree != null">
+        is_free = #{isFree,jdbcType=BIT},
+      </if>
+      <if test="ticketPrice != null">
+        ticket_price = #{ticketPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="isDel != null">
+        is_del = #{isDel,jdbcType=BIT},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.xunyou.model.TouristEntity">
+    update xy_tourist
+    set title = #{title,jdbcType=VARCHAR},
+      tourist_no = #{touristNo,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      lon = #{lon,jdbcType=VARCHAR},
+      lat = #{lat,jdbcType=VARCHAR},
+      specialities = #{specialities,jdbcType=VARCHAR},
+      open_start_time = #{openStartTime,jdbcType=TIMESTAMP},
+      open_end_time = #{openEndTime,jdbcType=TIMESTAMP},
+      is_free = #{isFree,jdbcType=BIT},
+      ticket_price = #{ticketPrice,jdbcType=DECIMAL},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=BIT},
+      is_del = #{isDel,jdbcType=BIT},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunyou.model.TouristEntity">
+    update xy_tourist
+    set title = #{title,jdbcType=VARCHAR},
+      tourist_no = #{touristNo,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      lon = #{lon,jdbcType=VARCHAR},
+      lat = #{lat,jdbcType=VARCHAR},
+      specialities = #{specialities,jdbcType=VARCHAR},
+      open_start_time = #{openStartTime,jdbcType=TIMESTAMP},
+      open_end_time = #{openEndTime,jdbcType=TIMESTAMP},
+      is_free = #{isFree,jdbcType=BIT},
+      ticket_price = #{ticketPrice,jdbcType=DECIMAL},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=BIT},
+      is_del = #{isDel,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

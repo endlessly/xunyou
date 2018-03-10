@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xunyou.mapper.OrderGuideInfoEntityMapper">
+  <resultMap id="BaseResultMap" type="com.xunyou.model.OrderGuideInfoEntity">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="order_guide_no" jdbcType="VARCHAR" property="orderGuideNo" />
+    <result column="start_addr" jdbcType="VARCHAR" property="startAddr" />
+    <result column="end_addr" jdbcType="VARCHAR" property="endAddr" />
+    <result column="start_lat" jdbcType="VARCHAR" property="startLat" />
+    <result column="end_lon" jdbcType="VARCHAR" property="endLon" />
+    <result column="guide_code" jdbcType="CHAR" property="guideCode" />
+    <result column="guide_name" jdbcType="VARCHAR" property="guideName" />
+    <result column="guide_phone" jdbcType="CHAR" property="guidePhone" />
+    <result column="guide_idcard" jdbcType="VARCHAR" property="guideIdcard" />
+    <result column="cancel_msg" jdbcType="VARCHAR" property="cancelMsg" />
+    <result column="cancel_memo" jdbcType="CHAR" property="cancelMemo" />
+    <result column="tourist_name" jdbcType="VARCHAR" property="touristName" />
+    <result column="tourist_phone" jdbcType="VARCHAR" property="touristPhone" />
+    <result column="tourist_idcard" jdbcType="VARCHAR" property="touristIdcard" />
+    <result column="server_start_time" jdbcType="TIMESTAMP" property="serverStartTime" />
+    <result column="real_start_server_time" jdbcType="TIMESTAMP" property="realStartServerTime" />
+    <result column="real_end_server_time" jdbcType="TIMESTAMP" property="realEndServerTime" />
+    <result column="server_price" jdbcType="DECIMAL" property="serverPrice" />
+    <result column="charging_type" jdbcType="TINYINT" property="chargingType" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, order_guide_no, start_addr, end_addr, start_lat, end_lon, guide_code, guide_name, 
+    guide_phone, guide_idcard, cancel_msg, cancel_memo, tourist_name, tourist_phone, 
+    tourist_idcard, server_start_time, real_start_server_time, real_end_server_time, 
+    server_price, charging_type, create_date, update_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from xy_order_guide_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from xy_order_guide_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xunyou.model.OrderGuideInfoEntity">
+    insert into xy_order_guide_info (id, order_guide_no, start_addr, 
+      end_addr, start_lat, end_lon, 
+      guide_code, guide_name, guide_phone, 
+      guide_idcard, cancel_msg, cancel_memo, 
+      tourist_name, tourist_phone, tourist_idcard, 
+      server_start_time, real_start_server_time, 
+      real_end_server_time, server_price, charging_type, 
+      create_date, update_date)
+    values (#{id,jdbcType=INTEGER}, #{orderGuideNo,jdbcType=VARCHAR}, #{startAddr,jdbcType=VARCHAR}, 
+      #{endAddr,jdbcType=VARCHAR}, #{startLat,jdbcType=VARCHAR}, #{endLon,jdbcType=VARCHAR}, 
+      #{guideCode,jdbcType=CHAR}, #{guideName,jdbcType=VARCHAR}, #{guidePhone,jdbcType=CHAR}, 
+      #{guideIdcard,jdbcType=VARCHAR}, #{cancelMsg,jdbcType=VARCHAR}, #{cancelMemo,jdbcType=CHAR}, 
+      #{touristName,jdbcType=VARCHAR}, #{touristPhone,jdbcType=VARCHAR}, #{touristIdcard,jdbcType=VARCHAR}, 
+      #{serverStartTime,jdbcType=TIMESTAMP}, #{realStartServerTime,jdbcType=TIMESTAMP}, 
+      #{realEndServerTime,jdbcType=TIMESTAMP}, #{serverPrice,jdbcType=DECIMAL}, #{chargingType,jdbcType=TINYINT}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xunyou.model.OrderGuideInfoEntity">
+    insert into xy_order_guide_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orderGuideNo != null">
+        order_guide_no,
+      </if>
+      <if test="startAddr != null">
+        start_addr,
+      </if>
+      <if test="endAddr != null">
+        end_addr,
+      </if>
+      <if test="startLat != null">
+        start_lat,
+      </if>
+      <if test="endLon != null">
+        end_lon,
+      </if>
+      <if test="guideCode != null">
+        guide_code,
+      </if>
+      <if test="guideName != null">
+        guide_name,
+      </if>
+      <if test="guidePhone != null">
+        guide_phone,
+      </if>
+      <if test="guideIdcard != null">
+        guide_idcard,
+      </if>
+      <if test="cancelMsg != null">
+        cancel_msg,
+      </if>
+      <if test="cancelMemo != null">
+        cancel_memo,
+      </if>
+      <if test="touristName != null">
+        tourist_name,
+      </if>
+      <if test="touristPhone != null">
+        tourist_phone,
+      </if>
+      <if test="touristIdcard != null">
+        tourist_idcard,
+      </if>
+      <if test="serverStartTime != null">
+        server_start_time,
+      </if>
+      <if test="realStartServerTime != null">
+        real_start_server_time,
+      </if>
+      <if test="realEndServerTime != null">
+        real_end_server_time,
+      </if>
+      <if test="serverPrice != null">
+        server_price,
+      </if>
+      <if test="chargingType != null">
+        charging_type,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderGuideNo != null">
+        #{orderGuideNo,jdbcType=VARCHAR},
+      </if>
+      <if test="startAddr != null">
+        #{startAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="endAddr != null">
+        #{endAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="startLat != null">
+        #{startLat,jdbcType=VARCHAR},
+      </if>
+      <if test="endLon != null">
+        #{endLon,jdbcType=VARCHAR},
+      </if>
+      <if test="guideCode != null">
+        #{guideCode,jdbcType=CHAR},
+      </if>
+      <if test="guideName != null">
+        #{guideName,jdbcType=VARCHAR},
+      </if>
+      <if test="guidePhone != null">
+        #{guidePhone,jdbcType=CHAR},
+      </if>
+      <if test="guideIdcard != null">
+        #{guideIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="cancelMsg != null">
+        #{cancelMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="cancelMemo != null">
+        #{cancelMemo,jdbcType=CHAR},
+      </if>
+      <if test="touristName != null">
+        #{touristName,jdbcType=VARCHAR},
+      </if>
+      <if test="touristPhone != null">
+        #{touristPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="touristIdcard != null">
+        #{touristIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="serverStartTime != null">
+        #{serverStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="realStartServerTime != null">
+        #{realStartServerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="realEndServerTime != null">
+        #{realEndServerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="serverPrice != null">
+        #{serverPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="chargingType != null">
+        #{chargingType,jdbcType=TINYINT},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunyou.model.OrderGuideInfoEntity">
+    update xy_order_guide_info
+    <set>
+      <if test="orderGuideNo != null">
+        order_guide_no = #{orderGuideNo,jdbcType=VARCHAR},
+      </if>
+      <if test="startAddr != null">
+        start_addr = #{startAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="endAddr != null">
+        end_addr = #{endAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="startLat != null">
+        start_lat = #{startLat,jdbcType=VARCHAR},
+      </if>
+      <if test="endLon != null">
+        end_lon = #{endLon,jdbcType=VARCHAR},
+      </if>
+      <if test="guideCode != null">
+        guide_code = #{guideCode,jdbcType=CHAR},
+      </if>
+      <if test="guideName != null">
+        guide_name = #{guideName,jdbcType=VARCHAR},
+      </if>
+      <if test="guidePhone != null">
+        guide_phone = #{guidePhone,jdbcType=CHAR},
+      </if>
+      <if test="guideIdcard != null">
+        guide_idcard = #{guideIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="cancelMsg != null">
+        cancel_msg = #{cancelMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="cancelMemo != null">
+        cancel_memo = #{cancelMemo,jdbcType=CHAR},
+      </if>
+      <if test="touristName != null">
+        tourist_name = #{touristName,jdbcType=VARCHAR},
+      </if>
+      <if test="touristPhone != null">
+        tourist_phone = #{touristPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="touristIdcard != null">
+        tourist_idcard = #{touristIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="serverStartTime != null">
+        server_start_time = #{serverStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="realStartServerTime != null">
+        real_start_server_time = #{realStartServerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="realEndServerTime != null">
+        real_end_server_time = #{realEndServerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="serverPrice != null">
+        server_price = #{serverPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="chargingType != null">
+        charging_type = #{chargingType,jdbcType=TINYINT},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunyou.model.OrderGuideInfoEntity">
+    update xy_order_guide_info
+    set order_guide_no = #{orderGuideNo,jdbcType=VARCHAR},
+      start_addr = #{startAddr,jdbcType=VARCHAR},
+      end_addr = #{endAddr,jdbcType=VARCHAR},
+      start_lat = #{startLat,jdbcType=VARCHAR},
+      end_lon = #{endLon,jdbcType=VARCHAR},
+      guide_code = #{guideCode,jdbcType=CHAR},
+      guide_name = #{guideName,jdbcType=VARCHAR},
+      guide_phone = #{guidePhone,jdbcType=CHAR},
+      guide_idcard = #{guideIdcard,jdbcType=VARCHAR},
+      cancel_msg = #{cancelMsg,jdbcType=VARCHAR},
+      cancel_memo = #{cancelMemo,jdbcType=CHAR},
+      tourist_name = #{touristName,jdbcType=VARCHAR},
+      tourist_phone = #{touristPhone,jdbcType=VARCHAR},
+      tourist_idcard = #{touristIdcard,jdbcType=VARCHAR},
+      server_start_time = #{serverStartTime,jdbcType=TIMESTAMP},
+      real_start_server_time = #{realStartServerTime,jdbcType=TIMESTAMP},
+      real_end_server_time = #{realEndServerTime,jdbcType=TIMESTAMP},
+      server_price = #{serverPrice,jdbcType=DECIMAL},
+      charging_type = #{chargingType,jdbcType=TINYINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

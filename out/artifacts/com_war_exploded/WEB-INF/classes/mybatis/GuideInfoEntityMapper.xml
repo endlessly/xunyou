@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xunyou.mapper.GuideInfoEntityMapper">
+  <resultMap id="BaseResultMap" type="com.xunyou.model.GuideInfoEntity">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="guide_no" jdbcType="VARCHAR" property="guideNo" />
+    <result column="is_online" jdbcType="BIT" property="isOnline" />
+    <result column="idcard_no" jdbcType="VARCHAR" property="idcardNo" />
+    <result column="server_language" jdbcType="VARCHAR" property="serverLanguage" />
+    <result column="server_times" jdbcType="INTEGER" property="serverTimes" />
+    <result column="server_introduce" jdbcType="VARCHAR" property="serverIntroduce" />
+    <result column="self_introduce" jdbcType="VARCHAR" property="selfIntroduce" />
+    <result column="stars" jdbcType="VARCHAR" property="stars" />
+    <result column="charging_type" jdbcType="TINYINT" property="chargingType" />
+    <result column="idcard_back" jdbcType="VARCHAR" property="idcardBack" />
+    <result column="idcard_front" jdbcType="VARCHAR" property="idcardFront" />
+    <result column="lon" jdbcType="VARCHAR" property="lon" />
+    <result column="lat" jdbcType="VARCHAR" property="lat" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, uid, guide_no, is_online, idcard_no, server_language, server_times, server_introduce, 
+    self_introduce, stars, charging_type, idcard_back, idcard_front, lon, lat, status, 
+    address, create_date, update_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from xy_guide_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from xy_guide_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xunyou.model.GuideInfoEntity">
+    insert into xy_guide_info (id, uid, guide_no, 
+      is_online, idcard_no, server_language, 
+      server_times, server_introduce, self_introduce, 
+      stars, charging_type, idcard_back, 
+      idcard_front, lon, lat, 
+      status, address, create_date, 
+      update_date)
+    values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{guideNo,jdbcType=VARCHAR}, 
+      #{isOnline,jdbcType=BIT}, #{idcardNo,jdbcType=VARCHAR}, #{serverLanguage,jdbcType=VARCHAR}, 
+      #{serverTimes,jdbcType=INTEGER}, #{serverIntroduce,jdbcType=VARCHAR}, #{selfIntroduce,jdbcType=VARCHAR}, 
+      #{stars,jdbcType=VARCHAR}, #{chargingType,jdbcType=TINYINT}, #{idcardBack,jdbcType=VARCHAR}, 
+      #{idcardFront,jdbcType=VARCHAR}, #{lon,jdbcType=VARCHAR}, #{lat,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xunyou.model.GuideInfoEntity">
+    insert into xy_guide_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="guideNo != null">
+        guide_no,
+      </if>
+      <if test="isOnline != null">
+        is_online,
+      </if>
+      <if test="idcardNo != null">
+        idcard_no,
+      </if>
+      <if test="serverLanguage != null">
+        server_language,
+      </if>
+      <if test="serverTimes != null">
+        server_times,
+      </if>
+      <if test="serverIntroduce != null">
+        server_introduce,
+      </if>
+      <if test="selfIntroduce != null">
+        self_introduce,
+      </if>
+      <if test="stars != null">
+        stars,
+      </if>
+      <if test="chargingType != null">
+        charging_type,
+      </if>
+      <if test="idcardBack != null">
+        idcard_back,
+      </if>
+      <if test="idcardFront != null">
+        idcard_front,
+      </if>
+      <if test="lon != null">
+        lon,
+      </if>
+      <if test="lat != null">
+        lat,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="guideNo != null">
+        #{guideNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isOnline != null">
+        #{isOnline,jdbcType=BIT},
+      </if>
+      <if test="idcardNo != null">
+        #{idcardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="serverLanguage != null">
+        #{serverLanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="serverTimes != null">
+        #{serverTimes,jdbcType=INTEGER},
+      </if>
+      <if test="serverIntroduce != null">
+        #{serverIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="selfIntroduce != null">
+        #{selfIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="stars != null">
+        #{stars,jdbcType=VARCHAR},
+      </if>
+      <if test="chargingType != null">
+        #{chargingType,jdbcType=TINYINT},
+      </if>
+      <if test="idcardBack != null">
+        #{idcardBack,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardFront != null">
+        #{idcardFront,jdbcType=VARCHAR},
+      </if>
+      <if test="lon != null">
+        #{lon,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null">
+        #{lat,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunyou.model.GuideInfoEntity">
+    update xy_guide_info
+    <set>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="guideNo != null">
+        guide_no = #{guideNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isOnline != null">
+        is_online = #{isOnline,jdbcType=BIT},
+      </if>
+      <if test="idcardNo != null">
+        idcard_no = #{idcardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="serverLanguage != null">
+        server_language = #{serverLanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="serverTimes != null">
+        server_times = #{serverTimes,jdbcType=INTEGER},
+      </if>
+      <if test="serverIntroduce != null">
+        server_introduce = #{serverIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="selfIntroduce != null">
+        self_introduce = #{selfIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="stars != null">
+        stars = #{stars,jdbcType=VARCHAR},
+      </if>
+      <if test="chargingType != null">
+        charging_type = #{chargingType,jdbcType=TINYINT},
+      </if>
+      <if test="idcardBack != null">
+        idcard_back = #{idcardBack,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardFront != null">
+        idcard_front = #{idcardFront,jdbcType=VARCHAR},
+      </if>
+      <if test="lon != null">
+        lon = #{lon,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null">
+        lat = #{lat,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunyou.model.GuideInfoEntity">
+    update xy_guide_info
+    set uid = #{uid,jdbcType=INTEGER},
+      guide_no = #{guideNo,jdbcType=VARCHAR},
+      is_online = #{isOnline,jdbcType=BIT},
+      idcard_no = #{idcardNo,jdbcType=VARCHAR},
+      server_language = #{serverLanguage,jdbcType=VARCHAR},
+      server_times = #{serverTimes,jdbcType=INTEGER},
+      server_introduce = #{serverIntroduce,jdbcType=VARCHAR},
+      self_introduce = #{selfIntroduce,jdbcType=VARCHAR},
+      stars = #{stars,jdbcType=VARCHAR},
+      charging_type = #{chargingType,jdbcType=TINYINT},
+      idcard_back = #{idcardBack,jdbcType=VARCHAR},
+      idcard_front = #{idcardFront,jdbcType=VARCHAR},
+      lon = #{lon,jdbcType=VARCHAR},
+      lat = #{lat,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

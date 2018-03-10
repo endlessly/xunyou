@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xunyou.mapper.UserInfoEntityMapper">
+  <resultMap id="BaseResultMap" type="com.xunyou.model.UserInfoEntity">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="breast" jdbcType="VARCHAR" property="breast" />
+    <result column="cards_info" jdbcType="VARCHAR" property="cardsInfo" />
+    <result column="reg_ip" jdbcType="VARCHAR" property="regIp" />
+    <result column="reg_date" jdbcType="TIMESTAMP" property="regDate" />
+    <result column="score" jdbcType="VARCHAR" property="score" />
+    <result column="birthday" jdbcType="TIMESTAMP" property="birthday" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, uid, breast, cards_info, reg_ip, reg_date, score, birthday, content, create_date, 
+    update_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from xy_user_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from xy_user_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xunyou.model.UserInfoEntity">
+    insert into xy_user_info (id, uid, breast, 
+      cards_info, reg_ip, reg_date, 
+      score, birthday, content, 
+      create_date, update_date)
+    values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{breast,jdbcType=VARCHAR}, 
+      #{cardsInfo,jdbcType=VARCHAR}, #{regIp,jdbcType=VARCHAR}, #{regDate,jdbcType=TIMESTAMP}, 
+      #{score,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP}, #{content,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xunyou.model.UserInfoEntity">
+    insert into xy_user_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="breast != null">
+        breast,
+      </if>
+      <if test="cardsInfo != null">
+        cards_info,
+      </if>
+      <if test="regIp != null">
+        reg_ip,
+      </if>
+      <if test="regDate != null">
+        reg_date,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="breast != null">
+        #{breast,jdbcType=VARCHAR},
+      </if>
+      <if test="cardsInfo != null">
+        #{cardsInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="regIp != null">
+        #{regIp,jdbcType=VARCHAR},
+      </if>
+      <if test="regDate != null">
+        #{regDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunyou.model.UserInfoEntity">
+    update xy_user_info
+    <set>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="breast != null">
+        breast = #{breast,jdbcType=VARCHAR},
+      </if>
+      <if test="cardsInfo != null">
+        cards_info = #{cardsInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="regIp != null">
+        reg_ip = #{regIp,jdbcType=VARCHAR},
+      </if>
+      <if test="regDate != null">
+        reg_date = #{regDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunyou.model.UserInfoEntity">
+    update xy_user_info
+    set uid = #{uid,jdbcType=INTEGER},
+      breast = #{breast,jdbcType=VARCHAR},
+      cards_info = #{cardsInfo,jdbcType=VARCHAR},
+      reg_ip = #{regIp,jdbcType=VARCHAR},
+      reg_date = #{regDate,jdbcType=TIMESTAMP},
+      score = #{score,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

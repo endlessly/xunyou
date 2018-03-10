@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xunyou.mapper.OrderGuideEntityMapper">
+  <resultMap id="BaseResultMap" type="com.xunyou.model.OrderGuideEntity">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="order_guide_no" jdbcType="VARCHAR" property="orderGuideNo" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="server_star" jdbcType="TIMESTAMP" property="serverStar" />
+    <result column="server_end" jdbcType="TIMESTAMP" property="serverEnd" />
+    <result column="guide_no" jdbcType="VARCHAR" property="guideNo" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="order_time" jdbcType="TIMESTAMP" property="orderTime" />
+    <result column="cancel_time" jdbcType="TIMESTAMP" property="cancelTime" />
+    <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
+    <result column="pay_type" jdbcType="TINYINT" property="payType" />
+    <result column="server_status" jdbcType="TINYINT" property="serverStatus" />
+    <result column="pay_status" jdbcType="TINYINT" property="payStatus" />
+    <result column="status" jdbcType="BIT" property="status" />
+    <result column="is_del" jdbcType="BIT" property="isDel" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, order_guide_no, uid, server_star, server_end, guide_no, price, order_time, cancel_time, 
+    pay_time, pay_type, server_status, pay_status, status, is_del, create_date, update_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from xy_order_guide
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from xy_order_guide
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xunyou.model.OrderGuideEntity">
+    insert into xy_order_guide (id, order_guide_no, uid, 
+      server_star, server_end, guide_no, 
+      price, order_time, cancel_time, 
+      pay_time, pay_type, server_status, 
+      pay_status, status, is_del, create_date, 
+      update_date)
+    values (#{id,jdbcType=INTEGER}, #{orderGuideNo,jdbcType=VARCHAR}, #{uid,jdbcType=INTEGER}, 
+      #{serverStar,jdbcType=TIMESTAMP}, #{serverEnd,jdbcType=TIMESTAMP}, #{guideNo,jdbcType=VARCHAR}, 
+      #{price,jdbcType=DECIMAL}, #{orderTime,jdbcType=TIMESTAMP}, #{cancelTime,jdbcType=TIMESTAMP}, 
+      #{payTime,jdbcType=TIMESTAMP}, #{payType,jdbcType=TINYINT}, #{serverStatus,jdbcType=TINYINT}, 
+      #{payStatus,jdbcType=TINYINT}, #{status,jdbcType=BIT}, #{isDel,jdbcType=BIT}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xunyou.model.OrderGuideEntity">
+    insert into xy_order_guide
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orderGuideNo != null">
+        order_guide_no,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="serverStar != null">
+        server_star,
+      </if>
+      <if test="serverEnd != null">
+        server_end,
+      </if>
+      <if test="guideNo != null">
+        guide_no,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="orderTime != null">
+        order_time,
+      </if>
+      <if test="cancelTime != null">
+        cancel_time,
+      </if>
+      <if test="payTime != null">
+        pay_time,
+      </if>
+      <if test="payType != null">
+        pay_type,
+      </if>
+      <if test="serverStatus != null">
+        server_status,
+      </if>
+      <if test="payStatus != null">
+        pay_status,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderGuideNo != null">
+        #{orderGuideNo,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="serverStar != null">
+        #{serverStar,jdbcType=TIMESTAMP},
+      </if>
+      <if test="serverEnd != null">
+        #{serverEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="guideNo != null">
+        #{guideNo,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="orderTime != null">
+        #{orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cancelTime != null">
+        #{cancelTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payTime != null">
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payType != null">
+        #{payType,jdbcType=TINYINT},
+      </if>
+      <if test="serverStatus != null">
+        #{serverStatus,jdbcType=TINYINT},
+      </if>
+      <if test="payStatus != null">
+        #{payStatus,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=BIT},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunyou.model.OrderGuideEntity">
+    update xy_order_guide
+    <set>
+      <if test="orderGuideNo != null">
+        order_guide_no = #{orderGuideNo,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="serverStar != null">
+        server_star = #{serverStar,jdbcType=TIMESTAMP},
+      </if>
+      <if test="serverEnd != null">
+        server_end = #{serverEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="guideNo != null">
+        guide_no = #{guideNo,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="orderTime != null">
+        order_time = #{orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cancelTime != null">
+        cancel_time = #{cancelTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payTime != null">
+        pay_time = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payType != null">
+        pay_type = #{payType,jdbcType=TINYINT},
+      </if>
+      <if test="serverStatus != null">
+        server_status = #{serverStatus,jdbcType=TINYINT},
+      </if>
+      <if test="payStatus != null">
+        pay_status = #{payStatus,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="isDel != null">
+        is_del = #{isDel,jdbcType=BIT},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunyou.model.OrderGuideEntity">
+    update xy_order_guide
+    set order_guide_no = #{orderGuideNo,jdbcType=VARCHAR},
+      uid = #{uid,jdbcType=INTEGER},
+      server_star = #{serverStar,jdbcType=TIMESTAMP},
+      server_end = #{serverEnd,jdbcType=TIMESTAMP},
+      guide_no = #{guideNo,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      order_time = #{orderTime,jdbcType=TIMESTAMP},
+      cancel_time = #{cancelTime,jdbcType=TIMESTAMP},
+      pay_time = #{payTime,jdbcType=TIMESTAMP},
+      pay_type = #{payType,jdbcType=TINYINT},
+      server_status = #{serverStatus,jdbcType=TINYINT},
+      pay_status = #{payStatus,jdbcType=TINYINT},
+      status = #{status,jdbcType=BIT},
+      is_del = #{isDel,jdbcType=BIT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xunyou.mapper.HotelRoomEntityMapper">
+  <resultMap id="BaseResultMap" type="com.xunyou.model.HotelRoomEntity">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="hotel_no" jdbcType="VARCHAR" property="hotelNo" />
+    <result column="room_no" jdbcType="CHAR" property="roomNo" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="room_album" jdbcType="VARCHAR" property="roomAlbum" />
+    <result column="floor" jdbcType="VARCHAR" property="floor" />
+    <result column="status" jdbcType="BIT" property="status" />
+    <result column="is_del" jdbcType="TINYINT" property="isDel" />
+    <result column="is_free" jdbcType="BIT" property="isFree" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.xunyou.model.HotelRoomEntity">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, hotel_no, room_no, title, price, type, room_album, floor, status, is_del, is_free, 
+    create_date, update_date
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from xy_hotel_room
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from xy_hotel_room
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xunyou.model.HotelRoomEntity">
+    insert into xy_hotel_room (id, hotel_no, room_no, 
+      title, price, type, 
+      room_album, floor, status, 
+      is_del, is_free, create_date, 
+      update_date, content)
+    values (#{id,jdbcType=INTEGER}, #{hotelNo,jdbcType=VARCHAR}, #{roomNo,jdbcType=CHAR}, 
+      #{title,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{type,jdbcType=INTEGER}, 
+      #{roomAlbum,jdbcType=VARCHAR}, #{floor,jdbcType=VARCHAR}, #{status,jdbcType=BIT}, 
+      #{isDel,jdbcType=TINYINT}, #{isFree,jdbcType=BIT}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xunyou.model.HotelRoomEntity">
+    insert into xy_hotel_room
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="hotelNo != null">
+        hotel_no,
+      </if>
+      <if test="roomNo != null">
+        room_no,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="roomAlbum != null">
+        room_album,
+      </if>
+      <if test="floor != null">
+        floor,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+      <if test="isFree != null">
+        is_free,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="hotelNo != null">
+        #{hotelNo,jdbcType=VARCHAR},
+      </if>
+      <if test="roomNo != null">
+        #{roomNo,jdbcType=CHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="roomAlbum != null">
+        #{roomAlbum,jdbcType=VARCHAR},
+      </if>
+      <if test="floor != null">
+        #{floor,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=TINYINT},
+      </if>
+      <if test="isFree != null">
+        #{isFree,jdbcType=BIT},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunyou.model.HotelRoomEntity">
+    update xy_hotel_room
+    <set>
+      <if test="hotelNo != null">
+        hotel_no = #{hotelNo,jdbcType=VARCHAR},
+      </if>
+      <if test="roomNo != null">
+        room_no = #{roomNo,jdbcType=CHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="roomAlbum != null">
+        room_album = #{roomAlbum,jdbcType=VARCHAR},
+      </if>
+      <if test="floor != null">
+        floor = #{floor,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="isDel != null">
+        is_del = #{isDel,jdbcType=TINYINT},
+      </if>
+      <if test="isFree != null">
+        is_free = #{isFree,jdbcType=BIT},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.xunyou.model.HotelRoomEntity">
+    update xy_hotel_room
+    set hotel_no = #{hotelNo,jdbcType=VARCHAR},
+      room_no = #{roomNo,jdbcType=CHAR},
+      title = #{title,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      type = #{type,jdbcType=INTEGER},
+      room_album = #{roomAlbum,jdbcType=VARCHAR},
+      floor = #{floor,jdbcType=VARCHAR},
+      status = #{status,jdbcType=BIT},
+      is_del = #{isDel,jdbcType=TINYINT},
+      is_free = #{isFree,jdbcType=BIT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunyou.model.HotelRoomEntity">
+    update xy_hotel_room
+    set hotel_no = #{hotelNo,jdbcType=VARCHAR},
+      room_no = #{roomNo,jdbcType=CHAR},
+      title = #{title,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      type = #{type,jdbcType=INTEGER},
+      room_album = #{roomAlbum,jdbcType=VARCHAR},
+      floor = #{floor,jdbcType=VARCHAR},
+      status = #{status,jdbcType=BIT},
+      is_del = #{isDel,jdbcType=TINYINT},
+      is_free = #{isFree,jdbcType=BIT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xunyou.mapper.AddressEntityMapper">
+  <resultMap id="BaseResultMap" type="com.xunyou.model.AddressEntity">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
+    <result column="area_id" jdbcType="BIGINT" property="areaId" />
+    <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="created_uid" jdbcType="INTEGER" property="createdUid" />
+    <result column="latitude" jdbcType="DOUBLE" property="latitude" />
+    <result column="longitude" jdbcType="DOUBLE" property="longitude" />
+    <result column="gps_address" jdbcType="VARCHAR" property="gpsAddress" />
+    <result column="gps_auto" jdbcType="VARCHAR" property="gpsAuto" />
+    <result column="is_primary" jdbcType="BIT" property="isPrimary" />
+    <result column="last_modified_date" jdbcType="TIMESTAMP" property="lastModifiedDate" />
+    <result column="last_modified_uid" jdbcType="INTEGER" property="lastModifiedUid" />
+    <result column="notes" jdbcType="VARCHAR" property="notes" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="type_id" jdbcType="BIGINT" property="typeId" />
+    <result column="zip_code" jdbcType="VARCHAR" property="zipCode" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.xunyou.model.AddressEntity">
+    <result column="location" jdbcType="BINARY" property="location" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, address, area, area_id, created_date, created_uid, latitude, longitude, gps_address, 
+    gps_auto, is_primary, last_modified_date, last_modified_uid, notes, status, type, 
+    type_id, zip_code
+  </sql>
+  <sql id="Blob_Column_List">
+    location
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from xy_address
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from xy_address
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xunyou.model.AddressEntity">
+    insert into xy_address (id, address, area, 
+      area_id, created_date, created_uid, 
+      latitude, longitude, gps_address, 
+      gps_auto, is_primary, last_modified_date, 
+      last_modified_uid, notes, status, 
+      type, type_id, zip_code, 
+      location)
+    values (#{id,jdbcType=BIGINT}, #{address,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, 
+      #{areaId,jdbcType=BIGINT}, #{createdDate,jdbcType=TIMESTAMP}, #{createdUid,jdbcType=INTEGER}, 
+      #{latitude,jdbcType=DOUBLE}, #{longitude,jdbcType=DOUBLE}, #{gpsAddress,jdbcType=VARCHAR}, 
+      #{gpsAuto,jdbcType=VARCHAR}, #{isPrimary,jdbcType=BIT}, #{lastModifiedDate,jdbcType=TIMESTAMP}, 
+      #{lastModifiedUid,jdbcType=INTEGER}, #{notes,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{type,jdbcType=VARCHAR}, #{typeId,jdbcType=BIGINT}, #{zipCode,jdbcType=VARCHAR}, 
+      #{location,jdbcType=BINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xunyou.model.AddressEntity">
+    insert into xy_address
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="areaId != null">
+        area_id,
+      </if>
+      <if test="createdDate != null">
+        created_date,
+      </if>
+      <if test="createdUid != null">
+        created_uid,
+      </if>
+      <if test="latitude != null">
+        latitude,
+      </if>
+      <if test="longitude != null">
+        longitude,
+      </if>
+      <if test="gpsAddress != null">
+        gps_address,
+      </if>
+      <if test="gpsAuto != null">
+        gps_auto,
+      </if>
+      <if test="isPrimary != null">
+        is_primary,
+      </if>
+      <if test="lastModifiedDate != null">
+        last_modified_date,
+      </if>
+      <if test="lastModifiedUid != null">
+        last_modified_uid,
+      </if>
+      <if test="notes != null">
+        notes,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="typeId != null">
+        type_id,
+      </if>
+      <if test="zipCode != null">
+        zip_code,
+      </if>
+      <if test="location != null">
+        location,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null">
+        #{areaId,jdbcType=BIGINT},
+      </if>
+      <if test="createdDate != null">
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdUid != null">
+        #{createdUid,jdbcType=INTEGER},
+      </if>
+      <if test="latitude != null">
+        #{latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="longitude != null">
+        #{longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="gpsAddress != null">
+        #{gpsAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="gpsAuto != null">
+        #{gpsAuto,jdbcType=VARCHAR},
+      </if>
+      <if test="isPrimary != null">
+        #{isPrimary,jdbcType=BIT},
+      </if>
+      <if test="lastModifiedDate != null">
+        #{lastModifiedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifiedUid != null">
+        #{lastModifiedUid,jdbcType=INTEGER},
+      </if>
+      <if test="notes != null">
+        #{notes,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null">
+        #{typeId,jdbcType=BIGINT},
+      </if>
+      <if test="zipCode != null">
+        #{zipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null">
+        #{location,jdbcType=BINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunyou.model.AddressEntity">
+    update xy_address
+    <set>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null">
+        area_id = #{areaId,jdbcType=BIGINT},
+      </if>
+      <if test="createdDate != null">
+        created_date = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdUid != null">
+        created_uid = #{createdUid,jdbcType=INTEGER},
+      </if>
+      <if test="latitude != null">
+        latitude = #{latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="longitude != null">
+        longitude = #{longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="gpsAddress != null">
+        gps_address = #{gpsAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="gpsAuto != null">
+        gps_auto = #{gpsAuto,jdbcType=VARCHAR},
+      </if>
+      <if test="isPrimary != null">
+        is_primary = #{isPrimary,jdbcType=BIT},
+      </if>
+      <if test="lastModifiedDate != null">
+        last_modified_date = #{lastModifiedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifiedUid != null">
+        last_modified_uid = #{lastModifiedUid,jdbcType=INTEGER},
+      </if>
+      <if test="notes != null">
+        notes = #{notes,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null">
+        type_id = #{typeId,jdbcType=BIGINT},
+      </if>
+      <if test="zipCode != null">
+        zip_code = #{zipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null">
+        location = #{location,jdbcType=BINARY},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.xunyou.model.AddressEntity">
+    update xy_address
+    set address = #{address,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      area_id = #{areaId,jdbcType=BIGINT},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      created_uid = #{createdUid,jdbcType=INTEGER},
+      latitude = #{latitude,jdbcType=DOUBLE},
+      longitude = #{longitude,jdbcType=DOUBLE},
+      gps_address = #{gpsAddress,jdbcType=VARCHAR},
+      gps_auto = #{gpsAuto,jdbcType=VARCHAR},
+      is_primary = #{isPrimary,jdbcType=BIT},
+      last_modified_date = #{lastModifiedDate,jdbcType=TIMESTAMP},
+      last_modified_uid = #{lastModifiedUid,jdbcType=INTEGER},
+      notes = #{notes,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR},
+      type_id = #{typeId,jdbcType=BIGINT},
+      zip_code = #{zipCode,jdbcType=VARCHAR},
+      location = #{location,jdbcType=BINARY}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunyou.model.AddressEntity">
+    update xy_address
+    set address = #{address,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      area_id = #{areaId,jdbcType=BIGINT},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      created_uid = #{createdUid,jdbcType=INTEGER},
+      latitude = #{latitude,jdbcType=DOUBLE},
+      longitude = #{longitude,jdbcType=DOUBLE},
+      gps_address = #{gpsAddress,jdbcType=VARCHAR},
+      gps_auto = #{gpsAuto,jdbcType=VARCHAR},
+      is_primary = #{isPrimary,jdbcType=BIT},
+      last_modified_date = #{lastModifiedDate,jdbcType=TIMESTAMP},
+      last_modified_uid = #{lastModifiedUid,jdbcType=INTEGER},
+      notes = #{notes,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR},
+      type_id = #{typeId,jdbcType=BIGINT},
+      zip_code = #{zipCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
