@@ -3,15 +3,17 @@ package com.xunyou.service.impl;
 import com.xunyou.mapper.UserEntityMapper;
 import com.xunyou.model.UserEntity;
 import com.xunyou.service.UserService;
+import org.omg.IOP.ENCODING_CDR_ENCAPS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl extends BaseService implements UserService{
     @Autowired
     UserEntityMapper userEntityMapper;
     @Override
@@ -21,7 +23,9 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public int update(UserEntity entity) {
+
         return 0;
+
     }
 
     @Override
@@ -42,6 +46,9 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public int insert(UserEntity entity) {
-        return 0;
+        entity.setCreateDate(new Date());
+        entity.setUpdateDate(new Date());
+       int result =userEntityMapper.insert(entity);
+        return result;
     }
 }

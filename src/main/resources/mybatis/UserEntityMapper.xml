@@ -30,7 +30,7 @@
     delete from xy_user
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.xunyou.model.UserEntity">
+  <insert id="insert" parameterType="com.xunyou.model.UserEntity" useGeneratedKeys="true" keyProperty="id">
     insert into xy_user (id, nick_name, mobile, 
       head_img, name, sex, password, 
       is_qualification, type, last_login_date, 

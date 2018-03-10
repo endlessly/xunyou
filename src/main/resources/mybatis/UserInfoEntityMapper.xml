@@ -28,7 +28,7 @@
     delete from xy_user_info
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.xunyou.model.UserInfoEntity">
+  <insert id="insert" parameterType="com.xunyou.model.UserInfoEntity" keyProperty="advertId">
     insert into xy_user_info (id, uid, breast, 
       cards_info, reg_ip, reg_date, 
       score, birthday, content, 
