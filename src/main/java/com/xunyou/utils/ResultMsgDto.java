@@ -37,4 +37,18 @@ public class ResultMsgDto implements Serializable {
     public void setResultMsg(String resultMsg) {
         this.resultMsg = resultMsg;
     }
+
+    public ResultMsgDto fail(String msg, Object o) {
+        setResultCode(0);
+        setResultMsg(msg);
+        setResultObject(o);
+        return this;
+    }
+
+    public ResultMsgDto success(String msg, Object o) {
+        setResultCode(1);
+        setResultMsg(msg);
+        setResultObject(o);
+        return this;
+    }
 }

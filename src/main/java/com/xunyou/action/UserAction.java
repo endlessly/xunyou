@@ -25,7 +25,8 @@ import java.util.Map;
 
 @Controller
 @ResponseBody
-public class UserAction {
+public class UserAction extends Base {
+
     @Autowired
     UserService userService;
     @Autowired
@@ -37,34 +38,31 @@ public class UserAction {
     }
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public String login(HttpServletRequest request, HttpServletResponse response) {
+    public ResultMsgDto login(HttpServletRequest request, HttpServletResponse response) {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
         if (username == null || password == null) {
-            return "fail";
+            res.fail("用户名密码不能为空", "");
         }
-        List list = new ArrayList();
         UserEntity user = userService.selectIdByNameAndPwd(username, password);
-        if (null == user)
-            return "fail";
-//        Map session=(Map) request.getSession();
-//        session.put("user",user);
+        if (null == user) {
+            res.fail("登录失败", "");
+        }
         HttpSession session = request.getSession();
         session.setAttribute("user", user);
-        return "success";
+        return res.success("登录成功", user);
     }
 
     @RequestMapping(value = "cklogin")
-    public String ckLogin(HttpServletRequest request, HttpServletResponse response) {
-        UserEntity user = (UserEntity) request.getSession().getAttribute("user");
-        if (user == null)
-            return "unlogin";
-        return "login";
+    public ResultMsgDto isLogin(HttpServletRequest request, HttpServletResponse response) {
+        UserEntity userEntity = this.checkLogin(request);
+        if (null == userEntity) return res.fail("未登录", "");
+        return res.success("已登录", userEntity);
     }
 
     @RequestMapping(value = "register")
-    public String register(@RequestBody ModelMap modelMap) throws InstantiationException, IllegalAccessException, IOException {
+    public ResultMsgDto register(@RequestBody ModelMap modelMap) throws InstantiationException, IllegalAccessException, IOException {
         UserEntity userEntity = new UserEntity();
         UserInfoEntity userInfoEntity = new UserInfoEntity();
         //获取raw格式数据
@@ -82,36 +80,28 @@ public class UserAction {
         if (null != userEntity.getId()) {
             userInfoEntity.setUid(userEntity.getId());
             userInfoService.insert(userInfoEntity);
-            return JsonUtil.toJson(userEntity) + JsonUtil.toJson(userInfoEntity);
+            return res.fail("注册失败", "");
+
         }
-        return "注册错误";
+        return res.fail("注册成功", userEntity);
     }
 
     @RequestMapping(value = "update")
     public ResultMsgDto update(HttpServletRequest request, HttpServletResponse response) {
-        ResultMsgDto resultMsgDto = new ResultMsgDto();
         String nickName = request.getParameter("nickName");
         if (null == nickName) {
-            resultMsgDto.setResultCode(0);
-            resultMsgDto.setResultMsg("未做修改");
-            return resultMsgDto;
+            return res.fail("未做修改", "");
         }
 
         UserEntity user = (UserEntity) request.getSession().getAttribute("user");
         if (null == user) {
-            resultMsgDto.setResultCode(0);
-            resultMsgDto.setResultMsg("请先登录");
-            return resultMsgDto;
+            return res.fail("请先登录", "");
         }
 
         user.setNickName(nickName);
         if (0 == userService.update(user)) {
-            resultMsgDto.setResultCode(0);
-            resultMsgDto.setResultMsg("请稍后再试");
-            return resultMsgDto;
+            return res.fail("请稍后再试", "");
         }
-        resultMsgDto.setResultCode(1);
-        resultMsgDto.setResultMsg("修改成功");
-        return resultMsgDto;
+        return res.success("修改成功", user);
     }
 }
