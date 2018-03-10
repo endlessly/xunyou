@@ -1,9 +1,11 @@
 package com.xunyou.action;
 
+import com.sun.corba.se.spi.ior.IdentifiableFactory;
 import com.xunyou.model.UserEntity;
 import com.xunyou.model.UserInfoEntity;
 import com.xunyou.service.UserInfoService;
 import com.xunyou.service.UserService;
+import com.xunyou.utils.FileUpload;
 import com.xunyou.utils.JsonUtil;
 import com.xunyou.utils.MapEntryConvet;
 import com.xunyou.utils.ResultMsgDto;
@@ -72,9 +74,6 @@ public class UserAction extends Base {
         Map userMap = JsonUtil.JsonTomap(user);
         Map userInfoMap = JsonUtil.JsonTomap(userInfo);
         userEntity = MapEntryConvet.toBean(userEntity.getClass(), userMap);
-        userEntity.setSex(true);
-        userEntity.setIsQualification(false);
-        userEntity.setStatus(true);
         userInfoEntity = MapEntryConvet.toBean(userInfoEntity.getClass(), userInfoMap);
         userService.insert(userEntity);
         if (null != userEntity.getId()) {
@@ -103,5 +102,12 @@ public class UserAction extends Base {
             return res.fail("请稍后再试", "");
         }
         return res.success("修改成功", user);
+    }
+
+    @RequestMapping("headUpload")
+    public ResultMsgDto UpdateImage(HttpServletRequest request) throws IOException {
+        String path = FileUpload.springUpload(request);
+        if (null == path) return res.fail("上传失败", "");
+        return res.success("上传成功", path);
     }
 }
