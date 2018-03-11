@@ -1,13 +1,19 @@
 package com.xunyou.interceptor;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletResponseWrapper;
 
 import com.xunyou.exception.Fail;
 import com.xunyou.model.UserEntity;
 import com.xunyou.utils.ResultMsgDto;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class LoginInterceptor extends HandlerInterceptorAdapter {
@@ -15,6 +21,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
             throws Exception {
+        String s = "";
         super.afterCompletion(request, response, handler, ex);
     }
 
@@ -41,7 +48,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
                     System.out.println(">>>未登录，請重新登录<<<");
                     response.sendRedirect("user/login");
                 }
-
                 return false;
             }
         }

@@ -1,6 +1,7 @@
 package com.xunyou.action;
 
 import com.sun.corba.se.spi.ior.IdentifiableFactory;
+import com.sun.org.apache.regexp.internal.RE;
 import com.xunyou.exception.Fail;
 import com.xunyou.model.UserEntity;
 import com.xunyou.model.UserInfoEntity;
@@ -17,12 +18,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,7 +38,7 @@ public class UserAction extends Base {
     UserInfoService userInfoService;
 
     @RequestMapping(value = "user/login")
-    public String Index() {
+    public String Index() throws Fail {
         return "loginAndRegist";
     }
 

@@ -13,7 +13,6 @@ public class ResultMsgDto implements Serializable {
     private int resultCode;
     private Object resultObject;
     private String resultMsg;
-
     public int getResultCode() {
         return resultCode;
     }
