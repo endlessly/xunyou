@@ -39,7 +39,7 @@ public class UserAction extends Base {
 
     @RequestMapping(value = "user/login")
     public String Index() throws Fail {
-        return "loginAndRegist";
+        throw new Fail("errr");
     }
 
     @ResponseBody
