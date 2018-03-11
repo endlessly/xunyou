@@ -38,8 +38,9 @@ public class UserAction extends Base {
     UserInfoService userInfoService;
 
     @RequestMapping(value = "user/login")
-    public String Index() throws Fail {
-        throw new Fail("errr");
+    public ModelAndView Index(ModelAndView modelAndView) throws Fail {
+        modelAndView.setViewName("login");
+        return modelAndView;
     }
 
     @ResponseBody
@@ -47,7 +48,6 @@ public class UserAction extends Base {
     public ResultMsgDto login(HttpServletRequest request, HttpServletResponse response) throws Fail {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-
         if (username == null || password == null) {
             throw new Fail("用户名密码不能为空");
         }
@@ -119,5 +119,9 @@ public class UserAction extends Base {
         String path = FileUpload.springUpload(request);
         if (null == path) throw new Fail("请选择文件");
         return res.success("上传成功", path);
+    }
+    @RequestMapping("test")
+    public String test(){
+        return "error";
     }
 }

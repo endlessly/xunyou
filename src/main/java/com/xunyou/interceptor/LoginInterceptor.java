@@ -36,27 +36,29 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             throws Exception {
         request.setCharacterEncoding("UTF-8");
         String url = request.getServletPath();
+        System.out.println(url);
         if (!url.equals("")) {
             //判斷是否已登录
             UserEntity loginUser = (UserEntity) request.getSession().getAttribute("user");
             if (loginUser == null) {
                 if (request.getMethod().trim().toLowerCase().equals("post")) {
-                    ResultMsgDto resultMsgDto = new ResultMsgDto();
                     throw new Fail("用户未登录");
                 } else {
                     //無session則是未登录狀態
                     System.out.println(">>>未登录，請重新登录<<<");
-                    response.sendRedirect("user/login");
+                    response.sendRedirect("/user/login");
+                    return false;
                 }
-                return false;
             }
         }
         return true;
         //return super.preHandle(request, response, handler);
     }
-    /*private boolean isPassUrl(String url){
-        if(!url.endsWith("/login/login")
-                && !url.endsWith("/login/chnagePassEntry")
+
+    private boolean isPassUrl(String url) {
+        if (!url.endsWith("/login/login")
+                && !url.endsWith("/user/login")
+                && !url.endsWith("/login")
                 && !url.endsWith("/login/change_Login")
                 && !url.endsWith("/API/Service")
                 && !url.endsWith("/API/Service2")
@@ -68,11 +70,11 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
                 && !url.endsWith(".css") && !url.endsWith(".png")
                 && !url.endsWith(".CSS") && !url.endsWith(".CSS")
                 && !url.endsWith(".jpg") && !url.endsWith(".gif")
-                && !url.endsWith(".JPG") && !url.endsWith(".GIF")){
+                && !url.endsWith(".JPG") && !url.endsWith(".GIF")) {
             return true;
         }
 
         return false;
-    }*/
+    }
 
 }
