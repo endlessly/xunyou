@@ -29,13 +29,13 @@ public class FileUpload {
                 //一次遍历所有文件
                 MultipartFile file = multiRequest.getFile(iter.next().toString());
                 if (file != null) {
-                    String fileName=file.getOriginalFilename();
-                    path = "/Users/huruisc/Documents/upload/";
-                    String extentionName=fileName.substring(fileName.lastIndexOf("."));
-                    String newPath=path+MD5Util.getMD5Code(fileName)+extentionName;
-                    System.out.println(newPath);
+                    String fileName = file.getOriginalFilename();
+                    String realpath = "/Users/huruisc/Documents/upload/";
+                    String extentionName = fileName.substring(fileName.lastIndexOf("."));
+                    path = realpath + MD5Util.getMD5Code(fileName) + extentionName;
+                    System.out.println(path);
                     //上传
-                    file.transferTo(new File(newPath));
+                    file.transferTo(new File(path));
                 }
 
             }

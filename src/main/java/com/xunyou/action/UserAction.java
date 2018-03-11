@@ -1,6 +1,7 @@
 package com.xunyou.action;
 
 import com.sun.corba.se.spi.ior.IdentifiableFactory;
+import com.xunyou.exception.Fail;
 import com.xunyou.model.UserEntity;
 import com.xunyou.model.UserInfoEntity;
 import com.xunyou.service.UserInfoService;
@@ -26,7 +27,6 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@ResponseBody
 public class UserAction extends Base {
 
     @Autowired
@@ -34,37 +34,40 @@ public class UserAction extends Base {
     @Autowired
     UserInfoService userInfoService;
 
-    @RequestMapping(value = "indexs", method = RequestMethod.POST)
+    @RequestMapping(value = "user/login")
     public String Index() {
-        return "fsdf";
+        return "loginAndRegist";
     }
 
+    @ResponseBody
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public ResultMsgDto login(HttpServletRequest request, HttpServletResponse response) {
+    public ResultMsgDto login(HttpServletRequest request, HttpServletResponse response) throws Fail {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
         if (username == null || password == null) {
-            res.fail("用户名密码不能为空", "");
+            throw new Fail("用户名密码不能为空");
         }
         UserEntity user = userService.selectIdByNameAndPwd(username, password);
         if (null == user) {
-            res.fail("登录失败", "");
+            throw new Fail("登录失败");
         }
         HttpSession session = request.getSession();
         session.setAttribute("user", user);
         return res.success("登录成功", user);
     }
 
+    @ResponseBody
     @RequestMapping(value = "cklogin")
-    public ResultMsgDto isLogin(HttpServletRequest request, HttpServletResponse response) {
+    public ResultMsgDto isLogin(HttpServletRequest request, HttpServletResponse response) throws Fail {
         UserEntity userEntity = this.checkLogin(request);
-        if (null == userEntity) return res.fail("未登录", "");
+        if (null == userEntity) throw new Fail("未登录");
         return res.success("已登录", userEntity);
     }
 
+    @ResponseBody
     @RequestMapping(value = "register")
-    public ResultMsgDto register(@RequestBody ModelMap modelMap) throws InstantiationException, IllegalAccessException, IOException {
+    public ResultMsgDto register(@RequestBody ModelMap modelMap) throws InstantiationException, IllegalAccessException, IOException, Fail {
         UserEntity userEntity = new UserEntity();
         UserInfoEntity userInfoEntity = new UserInfoEntity();
         //获取raw格式数据
@@ -79,35 +82,39 @@ public class UserAction extends Base {
         if (null != userEntity.getId()) {
             userInfoEntity.setUid(userEntity.getId());
             userInfoService.insert(userInfoEntity);
-            return res.fail("注册失败", "");
+            throw new Fail("注册失败");
 
         }
         return res.fail("注册成功", userEntity);
     }
 
+    @ResponseBody
     @RequestMapping(value = "update")
-    public ResultMsgDto update(HttpServletRequest request, HttpServletResponse response) {
+    public ResultMsgDto update(HttpServletRequest request, HttpServletResponse response) throws Fail {
         String nickName = request.getParameter("nickName");
         if (null == nickName) {
-            return res.fail("未做修改", "");
+            throw new Fail("未做修改");
+
         }
 
         UserEntity user = (UserEntity) request.getSession().getAttribute("user");
         if (null == user) {
-            return res.fail("请先登录", "");
+            throw new Fail("请先登录");
         }
 
         user.setNickName(nickName);
         if (0 == userService.update(user)) {
-            return res.fail("请稍后再试", "");
+            throw new Fail("请稍后再试");
+
         }
         return res.success("修改成功", user);
     }
 
+    @ResponseBody
     @RequestMapping("headUpload")
-    public ResultMsgDto UpdateImage(HttpServletRequest request) throws IOException {
+    public ResultMsgDto UpdateImage(HttpServletRequest request) throws IOException, Fail {
         String path = FileUpload.springUpload(request);
-        if (null == path) return res.fail("上传失败", "");
+        if (null == path) throw new Fail("请选择文件");
         return res.success("上传成功", path);
     }
 }
