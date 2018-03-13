@@ -46,14 +46,12 @@ public class UserAction extends Base {
     @RequestMapping(value = "welcome")
     public ModelAndView welcome(HttpServletRequest request, ModelAndView modelAndView) throws Fail {
         HttpSession session = request.getSession();
-        UserEntity userEntity = (UserEntity) session.getAttribute("user");
-        modelAndView.addObject("user", userEntity);
         modelAndView.setViewName("welcome");
         return modelAndView;
     }
 
 
-    @RequestMapping(value = "login", method = RequestMethod.POST)
+    @RequestMapping(value = "login")
     public void login(HttpServletRequest request, HttpServletResponse respons) throws Fail, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
@@ -67,6 +65,7 @@ public class UserAction extends Base {
 
         HttpSession session = request.getSession();
         session.setAttribute("user", user);
+        session.setAttribute("test", "");
         respons.sendRedirect("welcome");
 
 
