@@ -44,6 +44,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
                 if (request.getMethod().trim().toLowerCase().equals("post")) {
                     throw new Fail("用户未登录");
                 } else {
+
                     //無session則是未登录狀態
                     System.out.println(">>>未登录，請重新登录<<<");
                     response.sendRedirect("/user/login");
