@@ -31,7 +31,7 @@ public class UserFilter implements Filter {
 
 			// 非法请求，跳转到登陆页面
 			req.getSession().setAttribute("error", "非法请求，请登录！");
-			res.sendRedirect(req.getContextPath() + "/login");
+			res.sendRedirect(req.getContextPath() + "/user/login");
 		} else {
 			// 如果有下一个过滤器则跳转，否则直接到目标页面
 			chain.doFilter(request, response);

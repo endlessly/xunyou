@@ -35,13 +35,14 @@ public class MapEntryConvet {
                 String propertyName = descriptor.getName();
                 if (map.containsKey(propertyName)) {
                     // 下面一句可以 try 起来，这样当一个属性赋值失败的时候就不会影响其他属性赋值。
-                    Object value = map.get(propertyName);
+                    try {
+                        Object value = map.get(propertyName);
                     if ("".equals(value)) {
                         value = null;
                     }
                     Object[] args = new Object[1];
                     args[0] = value;
-                    try {
+
                         descriptor.getWriteMethod().invoke(obj, args);
                     } catch (InvocationTargetException e) {
                         System.out.println("字段映射失败");

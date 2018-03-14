@@ -23,10 +23,10 @@ public class HotelServiceImpl implements HotelService {
         record.setOpenEndTime(new Date());
         record.setOpenStartTime(new Date());
 
-      int result=  hotelEntityMapper.insert(record);
-      if(result == 0) return 0;
+        int result = hotelEntityMapper.insert(record);
+        if (result == 0) return 0;
 
-      return result;
+        return result;
     }
 
     @Override

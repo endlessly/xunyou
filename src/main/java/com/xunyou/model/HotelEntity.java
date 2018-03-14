@@ -1,5 +1,7 @@
 package com.xunyou.model;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.util.Date;
 
 public class HotelEntity {
@@ -14,9 +16,9 @@ public class HotelEntity {
     private String lon;
 
     private String lat;
-
+    @JSONField (format="yyyy-MM-dd HH:mm:ss")
     private Date openStartTime;
-
+    @JSONField (format="yyyy-MM-dd HH:mm:ss")
     private Date openEndTime;
 
     private String tel;
@@ -26,6 +28,7 @@ public class HotelEntity {
     private Boolean status;
 
     private Boolean isDel;
+
 
     private Date createDate;
 

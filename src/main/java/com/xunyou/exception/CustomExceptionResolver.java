@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 //全局异常处理器
-public class CustomExceptionResolver implements HandlerExceptionResolver {
+public class CustomExceptionResolver  implements HandlerExceptionResolver {
 
     //系统抛出的异常
     @Override
@@ -23,7 +23,7 @@ public class CustomExceptionResolver implements HandlerExceptionResolver {
         //handler就是处理器适配器要执行的Handler对象(只有method)
         //解析出异常类型。
 
-        //如果该 异常类型是系统 自定义的异常，直接取出异常信息，在错误页面展示。
+        //如果该异常类型是系统自定义的异常，直接取出异常信息，在错误页面展示。
         Fail error = null;
         if (ex instanceof Fail) {
             error = (Fail) ex;
@@ -36,7 +36,8 @@ public class CustomExceptionResolver implements HandlerExceptionResolver {
         //错误信息
         String message = error.getMessage();
         ModelAndView mav = new ModelAndView();
-        if (request.getMethod().trim().toLowerCase().equals("post")) {//如果是接口请求则返回错误消息体
+
+         if (request.getMethod().trim().toLowerCase().equals("post")) {//如果是接口请求则返回错误消息体
             MappingJackson2JsonView view = new MappingJackson2JsonView();
             Map<String, Object> result = new HashMap<String, Object>();
             result.put("resultCode", 0);

@@ -51,7 +51,7 @@
       #{hasRoom,jdbcType=BIT}, #{status,jdbcType=BIT}, #{isDel,jdbcType=BIT}, #{createDate,jdbcType=TIMESTAMP}, 
       #{updateDate,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.xunyou.model.HotelEntity">
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.xunyou.model.HotelEntity">
     insert into xy_hotel
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
