@@ -1,7 +1,9 @@
 package com.xunyou.mapper;
 
 import com.xunyou.model.UserInfoEntity;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface UserInfoEntityMapper {
     int deleteByPrimaryKey(Integer id);
 

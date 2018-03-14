@@ -20,8 +20,6 @@ public class HotelServiceImpl implements HotelService {
         record.setHotelNo("D001");
         record.setHasRoom(false);
         record.setStatus(true);
-        record.setOpenEndTime(new Date());
-        record.setOpenStartTime(new Date());
 
         int result = hotelEntityMapper.insert(record);
         if (result == 0) return 0;

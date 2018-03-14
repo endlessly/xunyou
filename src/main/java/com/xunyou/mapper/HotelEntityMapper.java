@@ -1,7 +1,9 @@
 package com.xunyou.mapper;
 
 import com.xunyou.model.HotelEntity;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface HotelEntityMapper {
     int deleteByPrimaryKey(Integer id);
 

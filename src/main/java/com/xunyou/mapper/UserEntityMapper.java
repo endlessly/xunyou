@@ -2,10 +2,11 @@ package com.xunyou.mapper;
 
 import com.xunyou.model.UserEntity;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
-
+@Repository
 public interface UserEntityMapper {
     int deleteByPrimaryKey(Integer id);
 

@@ -16,9 +16,7 @@ public class HotelEntity {
     private String lon;
 
     private String lat;
-    @JSONField (format="yyyy-MM-dd HH:mm:ss")
     private Date openStartTime;
-    @JSONField (format="yyyy-MM-dd HH:mm:ss")
     private Date openEndTime;
 
     private String tel;
