@@ -9,6 +9,7 @@ public interface HotelService {
     public int addHotel(HotelEntity record);
     public boolean delHotel();
     public List<HotelEntity> queryHotel();
-    public HotelEntity updateHotel();
+    public HotelEntity getHotelEntity(HotelEntity hotelEntity);
+    public int updateHotel(HotelEntity hotelEntity);
 
 }

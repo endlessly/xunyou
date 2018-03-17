@@ -36,9 +36,16 @@ public class HotelServiceImpl implements HotelService {
     public List<HotelEntity> queryHotel() {
         return null;
     }
+@Override
+    public HotelEntity getHotelEntity(HotelEntity hotelEntity) {
+        HotelEntity hotelEntity1=hotelEntityMapper.selectByPrimaryKey(hotelEntity.getId());
+        return hotelEntity1;
+    }
 
     @Override
-    public HotelEntity updateHotel() {
-        return null;
+    public int updateHotel(HotelEntity hotelEntity) {
+        hotelEntity.setUpdateDate(new Date());
+        int result=hotelEntityMapper.updateByPrimaryKey(hotelEntity);
+        return result;
     }
 }

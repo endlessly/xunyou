@@ -18,6 +18,7 @@ public class BaseService {
     }
 
     public Date StringToDate(String date) throws ParseException {
+        if (null==date) return  null;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date newDate = null;
         newDate = sdf.parse(date);

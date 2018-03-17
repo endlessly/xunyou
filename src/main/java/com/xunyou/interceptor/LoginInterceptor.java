@@ -22,12 +22,14 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
             throws Exception {
         String s = "";
+        response.setCharacterEncoding("UTF-8");
         super.afterCompletion(request, response, handler, ex);
     }
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
                            ModelAndView modelAndView) throws Exception {
+        response.setCharacterEncoding("UTF-8");
         super.postHandle(request, response, handler, modelAndView);
     }
 
