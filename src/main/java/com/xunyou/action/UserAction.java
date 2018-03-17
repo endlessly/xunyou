@@ -43,7 +43,7 @@ public class UserAction extends Base {
     @RequestMapping(value = "/")
     public ModelAndView welcome(HttpServletRequest request, ModelAndView modelAndView) throws Fail {
         HttpSession session = request.getSession();
-        modelAndView.setViewName("welcome");
+        modelAndView.setViewName("index");
         return modelAndView;
     }
 
@@ -62,8 +62,7 @@ public class UserAction extends Base {
         }
 
         HttpSession session = request.getSession();
-        session.setAttribute("user", user);
-        session.setAttribute("test", "");
+        session.setAttribute("user", 5555);
         respons.sendRedirect("/");
 
 
