@@ -1,7 +1,11 @@
 package com.xunyou.mapper;
 
 import com.xunyou.model.HotelAlbumEntity;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
+@Repository
 public interface HotelAlbumEntityMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +18,6 @@ public interface HotelAlbumEntityMapper {
     int updateByPrimaryKeySelective(HotelAlbumEntity record);
 
     int updateByPrimaryKey(HotelAlbumEntity record);
+
+    int insertList(List<HotelAlbumEntity> hotelAlbumEntityList);
 }

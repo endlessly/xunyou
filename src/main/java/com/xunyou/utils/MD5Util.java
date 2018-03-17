@@ -2,9 +2,10 @@ package com.xunyou.utils;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
+import java.util.UUID;
 
 public class MD5Util {
-    public static String getMD5Code(String code) throws  UnsupportedEncodingException {
+    public static String getMD5Code(String code) throws UnsupportedEncodingException {
 
         // //确定计算方法
         // MessageDigest md5=MessageDigest.getInstance("MD5");
@@ -31,14 +32,19 @@ public class MD5Util {
     }
 
     private static Object byteToHexString(byte b) {
-        String[] hexDigits ={"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d",
-                "e", "f" };
+        String[] hexDigits = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d",
+                "e", "f"};
         int n = b;
         if (n < 0)
             n += 256;
         int d1 = n / 16;
         int d2 = n % 16;
         return hexDigits[d1] + hexDigits[d2];
+    }
+
+    public static String uuid(String prefix) {
+
+        return prefix + "_" + UUID.randomUUID().toString();//用来生成数据库的主键id非常不错。。
     }
 
 }

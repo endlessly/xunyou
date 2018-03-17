@@ -2,6 +2,9 @@ package com.xunyou.service.hotel;
 
 import com.xunyou.mapper.HotelEntityMapper;
 import com.xunyou.model.HotelEntity;
+import com.xunyou.model.UserEntity;
+import com.xunyou.utils.JsonUtil;
+import com.xunyou.utils.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +20,7 @@ public class HotelServiceImpl implements HotelService {
     public int addHotel(HotelEntity record) {
         record.setUpdateDate(new Date());
         record.setCreateDate(new Date());
-        record.setHotelNo("D001");
+        record.setHotelNo(MD5Util.uuid("hotel"));
         record.setHasRoom(false);
         record.setStatus(true);
 
@@ -36,16 +39,23 @@ public class HotelServiceImpl implements HotelService {
     public List<HotelEntity> queryHotel() {
         return null;
     }
-@Override
+
+    @Override
     public HotelEntity getHotelEntity(HotelEntity hotelEntity) {
-        HotelEntity hotelEntity1=hotelEntityMapper.selectByPrimaryKey(hotelEntity.getId());
+        HotelEntity hotelEntity1 = hotelEntityMapper.selectByPrimaryKey(hotelEntity.getId());
         return hotelEntity1;
     }
 
     @Override
     public int updateHotel(HotelEntity hotelEntity) {
         hotelEntity.setUpdateDate(new Date());
-        int result=hotelEntityMapper.updateByPrimaryKey(hotelEntity);
+        int result = hotelEntityMapper.updateByPrimaryKey(hotelEntity);
         return result;
+    }
+
+    @Override
+    public HotelEntity getHotelByUuid(HotelEntity hotelEntity) {
+        return hotelEntityMapper.getHotelByUuid(hotelEntity);
+
     }
 }

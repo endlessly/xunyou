@@ -231,4 +231,12 @@
       update_date = #{updateDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="getHotelByUuid" parameterType="com.xunyou.model.HotelEntity" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from xy_hotel
+    where hotel_no = #{hotelNo,jdbcType=VARCHAR}
+  </select>
 </mapper>

@@ -9,11 +9,13 @@ import javax.swing.text.html.HTMLDocument;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Iterator;
+import java.util.*;
 
 public class FileUpload {
-    public static String springUpload(HttpServletRequest request) throws IllegalStateException, IOException {
+    public static List springUpload(HttpServletRequest request) throws IllegalStateException, IOException {
         String path = null;
+
+        List<String> list = new ArrayList<String>();
         long startTime = System.currentTimeMillis();
         //将当前上下文初始化给  CommonsMutipartResolver （多部分解析器）
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(
@@ -30,12 +32,13 @@ public class FileUpload {
                 MultipartFile file = multiRequest.getFile(iter.next().toString());
                 if (file != null) {
                     String fileName = file.getOriginalFilename();
-                    String realpath = "/Users/huruisc/Documents/upload/";
+                    String realpath = "G:/image/";
                     String extentionName = fileName.substring(fileName.lastIndexOf("."));
-                    path = realpath + MD5Util.getMD5Code(fileName) + extentionName;
-                    System.out.println(path);
+                    path = realpath + MD5Util.getMD5Code(fileName + System.currentTimeMillis()) + extentionName;
                     //上传
                     file.transferTo(new File(path));
+                    list.add(path);
+
                 }
 
             }
@@ -43,6 +46,6 @@ public class FileUpload {
         }
         long endTime = System.currentTimeMillis();
         System.out.println("方法三的运行时间：" + String.valueOf(endTime - startTime) + "ms");
-        return path;
+        return list;
     }
 }

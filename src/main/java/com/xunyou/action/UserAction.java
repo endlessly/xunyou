@@ -7,10 +7,7 @@ import com.xunyou.model.UserEntity;
 import com.xunyou.model.UserInfoEntity;
 import com.xunyou.service.UserInfoService;
 import com.xunyou.service.UserService;
-import com.xunyou.utils.FileUpload;
-import com.xunyou.utils.JsonUtil;
-import com.xunyou.utils.MapEntryConvet;
-import com.xunyou.utils.ResultMsgDto;
+import com.xunyou.utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -58,6 +55,7 @@ public class UserAction extends Base {
         if (username == null || password == null) {
             throw new Fail("用户名密码不能为空");
         }
+        password = MD5Util.getMD5Code(password);
         UserEntity user = userService.selectIdByNameAndPwd(username, password);
         if (null == user) {
             throw new Fail("登录失败");
@@ -91,13 +89,13 @@ public class UserAction extends Base {
         Map userMap = JsonUtil.JsonTomap(user);
         Map userInfoMap = JsonUtil.JsonTomap(userInfo);
         userEntity = MapEntryConvet.toBean(userEntity.getClass(), userMap);
+        //将用户密码加密存储
+        userEntity.setPassword(MD5Util.getMD5Code(userEntity.getPassword()));
         userInfoEntity = MapEntryConvet.toBean(userInfoEntity.getClass(), userInfoMap);
         userService.insert(userEntity);
         if (null != userEntity.getId()) {
             userInfoEntity.setUid(userEntity.getId());
             userInfoService.insert(userInfoEntity);
-            throw new Fail("注册失败");
-
         }
         return res.fail("注册成功", userEntity);
     }
@@ -127,9 +125,9 @@ public class UserAction extends Base {
     @ResponseBody
     @RequestMapping("headUpload")
     public ResultMsgDto UpdateImage(HttpServletRequest request) throws IOException, Fail {
-        String path = FileUpload.springUpload(request);
-        if (null == path) throw new Fail("请选择文件");
-        return res.success("上传成功", path);
+        List list = FileUpload.springUpload(request);
+        if (list.isEmpty()) throw new Fail("请选择文件");
+        return res.success("上传成功", list.get(0));
     }
 
     @RequestMapping("test")

@@ -1,11 +1,11 @@
-package com.xunyou.mapper;
+package com.xunyou.service.hotel;
 
 import com.xunyou.model.HotelAlbumEntity;
 import com.xunyou.model.HotelCommentEntity;
 
 import java.util.List;
 
-public interface HotelCommentEntityMapper {
+public interface HotelAlbumService {
     int deleteByPrimaryKey(Integer id);
 
     int insert(HotelCommentEntity record);
