@@ -34,6 +34,15 @@
     from xy_hotel_room
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <select id="selectByHotelNo" parameterType="string" resultType="com.xunyou.model.HotelRoomEntity">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from xy_hotel_room
+    where hotel_no = #{hotelNo,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from xy_hotel_room
     where id = #{id,jdbcType=INTEGER}
