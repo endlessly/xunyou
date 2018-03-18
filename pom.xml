@@ -209,14 +209,6 @@
             <version>2.9.4</version>
         </dependency>
 
-        <!-- FreeMarker -->
-        <!-- https://mvnrepository.com/artifact/org.freemarker/freemarker-gae -->
-        <dependency>
-            <groupId>org.freemarker</groupId>
-            <artifactId>freemarker-gae</artifactId>
-            <version>${freemarker.version}</version>
-        </dependency>
-
         <!--JSP -->
         <dependency>
             <groupId>javax.servlet.jsp</groupId>

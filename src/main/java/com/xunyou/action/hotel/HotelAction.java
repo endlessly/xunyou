@@ -137,7 +137,6 @@ public class HotelAction extends Base {
 
         String HohtelNo = request.getParameter("HohtelNo");
         if (null == HohtelAlumId || HohtelNo == null) throw new Fail("请选择酒店房间");
-
         HotelEntity hotelEntity = new HotelEntity();
         hotelEntity.setHotelNo(HohtelNo);
         if (null == hotelService.getHotelByUuid(hotelEntity)) throw new Fail("酒店未找到");

@@ -9,6 +9,8 @@ import com.xunyou.service.UserInfoService;
 import com.xunyou.service.UserService;
 import com.xunyou.utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -62,7 +64,7 @@ public class UserAction extends Base {
         }
 
         HttpSession session = request.getSession();
-        session.setAttribute("user", 5555);
+        session.setAttribute("user", user);
         respons.sendRedirect("/");
 
 
@@ -129,8 +131,8 @@ public class UserAction extends Base {
         return res.success("上传成功", list.get(0));
     }
 
-    @RequestMapping("test")
+    @RequestMapping("user/list")
     public String test() {
-        return "error";
+        return "";
     }
 }
