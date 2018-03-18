@@ -172,6 +172,7 @@ public class HotelAction extends Base {
         return res.success("添加酒店成功", "");
     }
 
+    @RequestMapping("hotel/room/update")
     public ResultMsgDto updateRoom(HttpServletRequest request) throws Fail {
         String hotelNo = request.getParameter("hotleNo");
         String title = request.getParameter("title");
@@ -187,8 +188,8 @@ public class HotelAction extends Base {
         hotelRoomEntity.setContent(content);
         hotelRoomEntity.setStatus(status);
         hotelRoomEntity.setIsFree(isFree);
-        if (0 == hotelRoomService.updateByPrimaryKeySelective(hotelRoomEntity)) return res.fail("更新失败","") ;
-        return res.success("更新成功","");
+        if (0 == hotelRoomService.updateByPrimaryKeySelective(hotelRoomEntity)) return res.fail("更新失败", "");
+        return res.success("更新成功", "");
 
     }
 

@@ -132,7 +132,7 @@ public class UserAction extends Base {
     }
 
     @RequestMapping("user/list")
-    public String test() {
-        return "";
+    public String userList() {
+        return "admin-list";
     }
 }
