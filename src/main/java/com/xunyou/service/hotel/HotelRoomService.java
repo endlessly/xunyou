@@ -1,8 +1,10 @@
-package com.xunyou.mapper;
+package com.xunyou.service.hotel;
+
 
 import com.xunyou.model.HotelRoomEntity;
 
-public interface HotelRoomEntityMapper {
+public interface HotelRoomService {
+
     int deleteByPrimaryKey(Integer id);
 
     int insert(HotelRoomEntity record);
@@ -18,4 +20,5 @@ public interface HotelRoomEntityMapper {
     int updateByPrimaryKeyWithBLOBs(HotelRoomEntity record);
 
     int updateByPrimaryKey(HotelRoomEntity record);
+
 }

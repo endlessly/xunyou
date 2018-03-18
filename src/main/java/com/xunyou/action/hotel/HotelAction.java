@@ -1,4 +1,4 @@
-package com.xunyou.action.Hotel;
+package com.xunyou.action.hotel;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.mysql.jdbc.PacketTooBigException;
@@ -6,14 +6,15 @@ import com.xunyou.action.Base;
 import com.xunyou.exception.Fail;
 import com.xunyou.model.HotelAlbumEntity;
 import com.xunyou.model.HotelEntity;
+import com.xunyou.model.HotelRoomEntity;
 import com.xunyou.service.hotel.HotelAlbumService;
+import com.xunyou.service.hotel.HotelRoomService;
 import com.xunyou.service.hotel.HotelService;
 import com.xunyou.service.impl.BaseService;
 import com.xunyou.utils.FileUpload;
 import com.xunyou.utils.JsonUtil;
 import com.xunyou.utils.MapEntryConvet;
 import com.xunyou.utils.ResultMsgDto;
-import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.LinkedList;
@@ -39,6 +41,8 @@ public class HotelAction extends Base {
     BaseService baseService;
     @Autowired
     HotelAlbumService hotelAlbumService;
+    @Autowired
+    HotelRoomService hotelRoomService;
 
     @ResponseBody
     @RequestMapping(value = "hotel/add")
@@ -145,6 +149,47 @@ public class HotelAction extends Base {
         if (null == hotelAlbumService.selectByPrimaryKey(id)) throw new Fail("相册不存在");
         if (hotelAlbumService.deleteByPrimaryKey(id) == 0) throw new Fail("删除失败");
         return res.success("删除成功", "");
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "hotel/room/add")
+    public ResultMsgDto addRoom(HotelRoomEntity hotelRoomEntity) throws Fail {
+        if (hotelRoomEntity.getHotelNo() == null) throw new Fail("请选择酒店");
+        if (hotelRoomEntity.getTitle() == null) throw new Fail("房间标题不能为空");
+        if (hotelRoomEntity.getFloor() == null) throw new Fail("楼层不能为空");
+        if (hotelRoomEntity.getPrice() == null) throw new Fail("价格不能为空");
+        if (hotelRoomEntity.getRoomNo() == null) throw new Fail("房间号不能为空");
+        hotelRoomEntity.setIsFree(true);
+        hotelRoomEntity.setIsDel((byte) 0);
+        hotelRoomEntity.setStatus(true);
+        HotelEntity hotelEntity = new HotelEntity();
+        hotelEntity.setHotelNo(hotelRoomEntity.getHotelNo());
+        hotelEntity = hotelService.getHotelByUuid(hotelEntity);
+        if (null == hotelEntity) throw new Fail("酒店未找到");
+        hotelRoomEntity.setCreateDate(new Date());
+        hotelRoomEntity.setUpdateDate(new Date());
+        if (0 == (hotelRoomService.insert(hotelRoomEntity))) throw new Fail("添加酒店失败");
+        return res.success("添加酒店成功", "");
+    }
+
+    public ResultMsgDto updateRoom(HttpServletRequest request) throws Fail {
+        String hotelNo = request.getParameter("hotleNo");
+        String title = request.getParameter("title");
+        BigDecimal price = new BigDecimal(request.getParameter("price"));
+        String content = request.getParameter("content");
+        boolean status = (request.getParameter("status") == "1") ? true : false;
+        boolean isFree = (request.getParameter("isFree") == "1") ? true : false;
+        if (null == hotelNo) throw new Fail("请选择酒店");
+        HotelRoomEntity hotelRoomEntity = hotelRoomService.selectByHotelNo(hotelNo);
+        if (null == hotelRoomEntity) throw new Fail("没有查询到指定房间");
+        hotelRoomEntity.setTitle(title);
+        hotelRoomEntity.setPrice(price);
+        hotelRoomEntity.setContent(content);
+        hotelRoomEntity.setStatus(status);
+        hotelRoomEntity.setIsFree(isFree);
+        if (0 == hotelRoomService.updateByPrimaryKeySelective(hotelRoomEntity)) return res.fail("更新失败","") ;
+        return res.success("更新成功","");
+
     }
 
 }
